@@ -1,0 +1,15 @@
+# openEMS working data. Everything here regenerates from the scripts.
+
+# FDTD output: field dumps, port voltages/currents, CSX models, hashes
+results/*
+!results/.gitkeep
+
+# generated geometry -- gen_spiral.py reproduces any of these from its parameters
+gds/*.gds
+
+# the stackup XML is generated too, but it IS committed: it is the one artefact that
+# depends on the installed PDK version, so having it in git makes PDK drift visible in
+# a diff. Regenerate with `make stackup`, prove it with `make stackup-validate`.
+
+__pycache__/
+*.pyc

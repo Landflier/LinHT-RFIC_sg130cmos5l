@@ -1,0 +1,54 @@
+# ~/.gnuplot
+# Main gnuplot startup file (linked into $HOME by install.sh).
+# It loads shared definitions once and defines aliases for the profile
+# families: @TYPST, @PAPER, and the @PPT slide-size variants.
+
+set macros
+
+# Location of the split configuration files. Resolution order:
+#   1. GP_CONFIG_DIR gnuplot variable, if set before this file is loaded
+#   2. GP_CONFIG_DIR environment variable (lets any checkout/container use the
+#      repo copy without touching $HOME: export GP_CONFIG_DIR=<repo>/scripts/gnuplot)
+#   3. ~/.config/gnuplot (default, what install.sh symlinks)
+if (!exists("GP_CONFIG_DIR")) GP_CONFIG_DIR = system("printf %s \"${GP_CONFIG_DIR:-$HOME/.config/gnuplot}\"")
+
+load GP_CONFIG_DIR . "/common.gp"
+
+# -----------------------------------------------------------------------------
+# Profile aliases
+# -----------------------------------------------------------------------------
+# What each profile emits:
+#   @TYPST                        SVG 1000x700, Latte background (typst.gp)
+#   @PAPER                        EPS 3.35in single column, epscairo (paper_eps.gp)
+#   @PPT / @PPT_QUARTER / ...     SVG at slide sizes, white background
+#                                 (presentation_svg.gp; size via PPT_FIGSIZE)
+#
+# Usage examples:
+#   @TYPST
+#   set output "figure.svg"
+#   plot "data.csv" u 1:2 w lp ls 1 title "data"
+#
+#   @PAPER
+#   set output "figure.eps"
+#   plot ...
+#
+#   @PPT
+#   set output "figure.svg"
+#   plot ...
+
+TYPST = "load '" . GP_CONFIG_DIR . "/typst.gp'"
+PAPER = "load '" . GP_CONFIG_DIR . "/paper_eps.gp'"
+
+# PowerPoint profiles: default is half-slide. Quarter and full-HD variants are
+# implemented through PPT_FIGSIZE and the same presentation profile file.
+PPT = "PPT_FIGSIZE='half'; load '" . GP_CONFIG_DIR . "/presentation_svg.gp'"
+PPT_HALF = PPT
+PPT_QUARTER = "PPT_FIGSIZE='quarter'; load '" . GP_CONFIG_DIR . "/presentation_svg.gp'"
+PPT_ONE_EIGHT = "PPT_FIGSIZE='one_eight'; load '" . GP_CONFIG_DIR . "/presentation_svg.gp'"
+PPT_FULLHD = "PPT_FIGSIZE='fullhd'; load '" . GP_CONFIG_DIR . "/presentation_svg.gp'"
+PPT_WITH_TITLE = "PPT_FIGSIZE='ppt_with_title'; load '" . GP_CONFIG_DIR . "/presentation_svg.gp'"
+
+
+# Default interactive profile. Change this if you want gnuplot startup to default
+# to @PAPER or @PPT instead.
+@TYPST

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!--
+  openEMS stackup for IHP SG13CMOS5L (M1-M4 + TopMetal1)
+
+  GENERATED FILE - do not edit by hand.
+  Regenerate : macros/pll_top/em/scripts/gen_stackup.py
+  Verify     : macros/pll_top/em/scripts/gen_stackup.py, validate flag
+
+  Metal corner        : nominal
+  Geometry source     : /foss/pdks/ihp-sg13cmos5l/libs.tech/klayout/tech/xsect/sg13cmos5l_for_EM.xs
+  Conductivity source : /foss/pdks/ihp-sg13cmos5l/libs.tech/magic/ihp-sg13cmos5l-extract.tech
+
+  Derived stack (z = 0 at the silicon surface, um):
+    Activ      GDS    1    0.0000 -   0.4000  (0.4000 thick)  not modelled
+    Cont       GDS    6    0.4000 -   1.0400  (0.6400 thick)  sigma 1.471e+06 S/m
+    Metal1     GDS    8    1.0400 -   1.4600  (0.4200 thick)  sigma 2.165e+07 S/m
+    Via1       GDS   19    1.4600 -   2.0000  (0.5400 thick)  sigma 1.662e+06 S/m
+    Metal2     GDS   10    2.0000 -   2.4900  (0.4900 thick)  sigma 2.319e+07 S/m
+    Via2       GDS   29    2.4900 -   3.0300  (0.5400 thick)  sigma 1.662e+06 S/m
+    Metal3     GDS   30    3.0300 -   3.5200  (0.4900 thick)  sigma 2.319e+07 S/m
+    Via3       GDS   49    3.5200 -   4.0600  (0.5400 thick)  sigma 1.662e+06 S/m
+    Metal4     GDS   50    4.0600 -   4.5500  (0.4900 thick)  sigma 2.319e+07 S/m
+    TopVia1    GDS  125    4.5500 -   5.4000  (0.8500 thick)  sigma 2.19e+06 S/m
+    TopMetal1  GDS  126    5.4000 -   7.4000  (2.0000 thick)  sigma 2.778e+07 S/m
+    SiO2                   0.0000 -   8.9000  (IMD oxide + passi1)
+    Passive                8.9000 -   9.3000  (nitride passivation)
+
+  Conductivity derivation (all inputs from ihp-sg13cmos5l):
+    Cont       sigma = 0.64 um / (17000 mOhm/contact * (0.16 um)^2)
+    Metal1     sigma = 1/(110 mOhm/sq * 0.42 um)
+    Via1       sigma = 0.54 um / (9000 mOhm/contact * (0.19 um)^2)
+    Metal2     sigma = 1/(88 mOhm/sq * 0.49 um)
+    Via2       sigma = 0.54 um / (9000 mOhm/contact * (0.19 um)^2)
+    Metal3     sigma = 1/(88 mOhm/sq * 0.49 um)
+    Via3       sigma = 0.54 um / (9000 mOhm/contact * (0.19 um)^2)
+    Metal4     sigma = 1/(88 mOhm/sq * 0.49 um)
+    TopVia1    sigma = 0.85 um / (2200 mOhm/contact * (0.42 um)^2)
+    TopMetal1  sigma = 1/(18 mOhm/sq * 2 um)
+
+  Layers in the .xs with no CMOS5L resistance data, omitted: Activ
+
+  INHERITED VALUES - the only numbers NOT from ihp-sg13cmos5l.
+  Source: IHP's official SG13G2 openEMS stackup. Same SG13 platform, but not
+  independently confirmed here. Challenge these first if measurements disagree:
+    SiO2       eps=4.1    sigma=0         IMD oxide permittivity; not in any CMOS5L file
+    Passive    eps=6.6    sigma=0         nitride passivation permittivity
+    Substrate  eps=11.9   sigma=2         bulk Si; conductivity = substrate doping choice
+    EPI        eps=11.9   sigma=5         epi layer; CMOS5L .xs marks EPI as 'TO DO'
+    AIR        eps=1      sigma=0         simulation domain above the die
+    LOWLOSS    eps=1      sigma=1e+10     artificial SUBGND reference, not a process layer
+    Substrate  thickness 280.0 um, AIR domain 300.0 um
+
+  Parser notes:
+    - t_epi = 3.75 is COMMENTED OUT in the .xs (PDK marks it 'TO DO'); thickness used as-is, conductivity inherited
+
+  SUBGND (layer 210) is not a PDK layer. It is an artificial low-loss ground
+  reference at the silicon surface, used as the far terminal of via ports in
+  2-port simulations. Carried over from IHP's official workflow.
+-->
+<Stackup schemaVersion="2.0">
+  <Materials>
+    <Material Name="Cont" Type="Conductor" Permittivity="1" DielectricLossTangent="0" Conductivity="1.47059e+06" Color="00ffff"/>
+    <Material Name="Metal1" Type="Conductor" Permittivity="1" DielectricLossTangent="0" Conductivity="2.1645e+07" Color="39bfff"/>
+    <Material Name="Via1" Type="Conductor" Permittivity="1" DielectricLossTangent="0" Conductivity="1.66205e+06" Color="ccccff"/>
+    <Material Name="Metal2" Type="Conductor" Permittivity="1" DielectricLossTangent="0" Conductivity="2.31911e+07" Color="ccccd9"/>
+    <Material Name="Via2" Type="Conductor" Permittivity="1" DielectricLossTangent="0" Conductivity="1.66205e+06" Color="ff3736"/>
+    <Material Name="Metal3" Type="Conductor" Permittivity="1" DielectricLossTangent="0" Conductivity="2.31911e+07" Color="d80000"/>
+    <Material Name="Via3" Type="Conductor" Permittivity="1" DielectricLossTangent="0" Conductivity="1.66205e+06" Color="9ba940"/>
+    <Material Name="Metal4" Type="Conductor" Permittivity="1" DielectricLossTangent="0" Conductivity="2.31911e+07" Color="93e837"/>
+    <Material Name="TopVia1" Type="Conductor" Permittivity="1" DielectricLossTangent="0" Conductivity="2.19027e+06" Color="ffe6bf"/>
+    <Material Name="TopMetal1" Type="Conductor" Permittivity="1" DielectricLossTangent="0" Conductivity="2.77778e+07" Color="ffe6bf"/>
+    <Material Name="SiO2" Type="Dielectric" Permittivity="4.1" DielectricLossTangent="0.0" Conductivity="0" Color="fffcad"/>
+    <Material Name="Passive" Type="Dielectric" Permittivity="6.6" DielectricLossTangent="0.0" Conductivity="0" Color="a0a0f0"/>
+    <Material Name="Substrate" Type="Semiconductor" Permittivity="11.9" DielectricLossTangent="0.0" Conductivity="2" Color="01e0ff"/>
+    <Material Name="EPI" Type="Semiconductor" Permittivity="11.9" DielectricLossTangent="0.0" Conductivity="5" Color="294fff"/>
+    <Material Name="AIR" Type="Dielectric" Permittivity="1.0" DielectricLossTangent="0.0" Conductivity="0" Color="d0d0d0"/>
+    <Material Name="LOWLOSS" Type="Conductor" Permittivity="1.0" DielectricLossTangent="0.0" Conductivity="1e+10" Color="ff0000"/>
+  </Materials>
+  <ELayers LengthUnit="um">
+    <Dielectrics>
+      <!-- listed top-down; the reader stacks them bottom-up from the last entry -->
+      <Dielectric Name="AIR" Material="AIR" Thickness="300.0000" />
+      <Dielectric Name="Passive" Material="Passive" Thickness="0.4000" />
+      <Dielectric Name="SiO2" Material="SiO2" Thickness="8.9000" />
+      <Dielectric Name="EPI" Material="EPI" Thickness="3.7500" />
+      <Dielectric Name="Substrate" Material="Substrate" Thickness="280.0000" />
+    </Dielectrics>
+    <Layers>
+      <!-- Offset = EPI + Substrate: Zmin/Zmax below are vs the silicon surface -->
+      <Substrate Offset="283.7500"/>
+      <Layer Name="Metal1" Type="conductor" Zmin="1.0400" Zmax="1.4600" Material="Metal1" Layer="8" />
+      <Layer Name="Metal2" Type="conductor" Zmin="2.0000" Zmax="2.4900" Material="Metal2" Layer="10" />
+      <Layer Name="Metal3" Type="conductor" Zmin="3.0300" Zmax="3.5200" Material="Metal3" Layer="30" />
+      <Layer Name="Metal4" Type="conductor" Zmin="4.0600" Zmax="4.5500" Material="Metal4" Layer="50" />
+      <Layer Name="TopMetal1" Type="conductor" Zmin="5.4000" Zmax="7.4000" Material="TopMetal1" Layer="126" />
+      <Layer Name="Cont" Type="via" Zmin="0.4000" Zmax="1.0400" Material="Cont" Layer="6" />
+      <Layer Name="Via1" Type="via" Zmin="1.4600" Zmax="2.0000" Material="Via1" Layer="19" />
+      <Layer Name="Via2" Type="via" Zmin="2.4900" Zmax="3.0300" Material="Via2" Layer="29" />
+      <Layer Name="Via3" Type="via" Zmin="3.5200" Zmax="4.0600" Material="Via3" Layer="49" />
+      <Layer Name="TopVia1" Type="via" Zmin="4.5500" Zmax="5.4000" Material="TopVia1" Layer="125" />
+      <Layer Name="SUBGND" Type="via" Zmin="-3.7500" Zmax="0.0000" Material="LOWLOSS" Layer="210" />
+    </Layers>
+  </ELayers>
+</Stackup>
