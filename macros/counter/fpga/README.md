@@ -144,7 +144,7 @@ Opens a file browser for this folder with `sak-open.py` from the [IIC-OSIC-TOOLS
 make open
 ```
 
-Clicking a button launches the matching tool in the file's own directory: gvim for the `Makefile` and the `README.md`, and the desktop's handler for a generated `.pdf` visualization. Only the file types listed in [the top-level README](../../../README.md#open-the-design-files) get a button, so the pin constraint files are not shown, and the RTL lives one level up in [`../rtl/`](../rtl/). Pass extra options with `OPEN_ARGS`, for example `make open OPEN_ARGS=--all` to include the build outputs.
+Clicking a button launches the matching tool in the file's own directory: gvim for the `Makefile` and the `README.md`, and the desktop's handler for a generated `.pdf` visualization. Only the file types listed in [the template flow reference](../../../doc/template_flow.md#open-the-design-files) get a button, so the pin constraint files are not shown, and the RTL lives one level up in [`../rtl/`](../rtl/). Pass extra options with `OPEN_ARGS`, for example `make open OPEN_ARGS=--all` to include the build outputs.
 
 > [!NOTE]
 > This target needs a display. Run it inside the container's VNC/noVNC desktop or over X11 forwarding. The `.pdf` buttons hand the file to the desktop's registered handler, so they need the full VNC/noVNC session and do not work over a bare X forward.

@@ -12,6 +12,12 @@ Reference material for this chip and for the IHP SG13CMOS5L Open-PDK it is built
 
 The three are cross-linked and are written against the design files, not the other way round. If you change a number in [flow/librelane/config.yaml](../flow/librelane/config.yaml), [rtl/](../rtl/) or [packaging/config.yaml](../packaging/config.yaml), mirror it here.
 
+## This flow
+
+| Document | Contents |
+| --- | --- |
+| [template_flow.md](template_flow.md) | The full flow reference: directory tree, Xschem configuration, and every Makefile target. It comes from the upstream template README, and it also covers this repository's additions (`init-macro`, `init-submodule`, the `SIM` knob, the PDK pin). |
+
 ## Tools
 
 | Document | Contents |
