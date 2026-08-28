@@ -28,8 +28,9 @@ ln -sf "$DIR/dot_gnuplot" "$HOME/.gnuplot"
 
 # STIX Two fonts — needed by the cairo terminals (@PAPER/epscairo) which
 # rasterize text locally; the svg terminals only reference the font by name.
-# fontconfig's user dir is $XDG_DATA_HOME/fonts (the IIC-OSIC-TOOLS container
-# sets XDG_DATA_HOME=/headless/.data-default), falling back to ~/.local/share.
+# fontconfig's user dir is $XDG_DATA_HOME/fonts, falling back to
+# ~/.local/share. IIC-OSIC-TOOLS 2026.06 set XDG_DATA_HOME=/headless/.data-default;
+# 2026.08 leaves it unset, so the fallback is what applies there.
 # Individual file links so an existing user font dir is never clobbered.
 if [ -d "$DIR/fonts" ] && command -v fc-cache >/dev/null 2>&1; then
     FONTDST="${XDG_DATA_HOME:-$HOME/.local/share}/fonts"

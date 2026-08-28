@@ -8,6 +8,23 @@ RUN_TAG = $(shell ls -1 $(LIBRELANE_DIR)/runs 2>/dev/null | tail -n 1)
 # Variables
 TOP = counter_top
 
+# --- PDK pin -------------------------------------------------------------------
+# This repo targets SG13CMOS5L exclusively, so the PDK is assigned here rather than
+# defaulted with ?=. The container sources $DESIGNS/.designinit, which exports a
+# *valid* ihp-sg13g2 for the sibling LinHT_IC checkout that shares the designs/
+# directory; an environment value would win over ?=. A plain make assignment
+# overrides the environment, while an explicit `make PDK=<other>` still wins.
+# Exported because recipes read $$PDK from the shell (cace, librelane) and because
+# the tools below read these from the environment, not from make.
+PDK := ihp-sg13cmos5l
+PDKPATH := $(PDK_ROOT)/$(PDK)
+STD_CELL_LIBRARY := sg13cmos5l_stdcell
+SPICE_USERINIT_DIR := $(PDKPATH)/libs.tech/ngspice
+KLAYOUT_PATH := $(HOME)/.klayout:$(PDKPATH)/libs.tech/klayout:$(PDKPATH)/libs.tech/klayout/tech
+export PDK PDKPATH STD_CELL_LIBRARY SPICE_USERINIT_DIR KLAYOUT_PATH
+# --------------------------------------------------------------------------------
+
+
 .DEFAULT_GOAL := help
 
 # Cell name for verification targets (default: top-level cell)

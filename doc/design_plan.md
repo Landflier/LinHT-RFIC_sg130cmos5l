@@ -300,7 +300,7 @@ LO runs from SE to SW (RF mixers) as differential shielded pairs on TM1; supply-
 
 ## 10. Design-flow mapping (OSICD)
 
-Container: **IIC-OSIC-TOOLS ≥ 2026.06**, pinned per tapeout. Everything Makefile-driven from this repo; every block a recursive macro (`macros/<name>/` with its own Makefile, `schematic/`, `testbenches/`, `verification/`, `final/`).
+Container: **IIC-OSIC-TOOLS ≥ 2026.08**, pinned per tapeout. Everything Makefile-driven from this repo; every block a recursive macro (`macros/<name>/` with its own Makefile, `schematic/`, `testbenches/`, `verification/`, `final/`).
 
 | Activity | Tool(s) |
 | --- | --- |

@@ -264,7 +264,7 @@ Xschem reads exactly one `xschemrc` at start-up, and that file decides which sym
 
 All of them run the same four steps, in this order:
 
-1. **Pick the PDK.** `PDK_ROOT` is probed in the usual install locations if the environment does not set it, and `PDK` falls back to `ihp-sg13cmos5l`. The container already exports `PDK_ROOT`, and [`.designinit`](.designinit) exports `PDK`, so this step is only a safety net for an Xschem started outside that environment.
+1. **Pin the PDK.** `PDK_ROOT` is probed in the usual install locations if the environment does not set it. `PDK` is then set to `ihp-sg13cmos5l` unconditionally, not merely defaulted: this project targets SG13CMOS5L only, and an inherited `PDK` naming a different *installed* PDK — which a shared `$DESIGNS/.designinit` can easily supply when several checkouts live side by side — would otherwise be accepted silently. The Makefiles pin and export the same set (`PDK`, `PDKPATH`, `STD_CELL_LIBRARY`, `SPICE_USERINIT_DIR`, `KLAYOUT_PATH`) for the non-Xschem tools; `make PDK=<other>` on the command line still overrides.
 2. **Source the PDK `xschemrc`.** `$PDK_ROOT/$PDK/libs.tech/xschem/xschemrc` brings in the IHP device symbols, the ngspice model paths and the IHP menu. It is guarded by `[info exists PDK]` so it is read once even when several project files are chained.
 3. **Add the project library paths.** `append_xschem_library_path_unique` appends a folder to `XSCHEM_LIBRARY_PATH` only if it is not already there, so the same folder never appears twice no matter how the files are chained. [`testbenches/xschem/xschemrc`](testbenches/xschem/xschemrc) adds none of its own and gets its paths from the file it sources.
 4. **Pin the netlist directory.** `pin_netlist_dir` decides where `xschem netlist` and the simulators write.
@@ -310,7 +310,7 @@ All `simulations/` folders are generated and git-ignored.
 ### Which File Is Used
 
 - The Makefile targets always name one explicitly with `--rcfile`, so a target behaves the same from any working directory.
-- Inside the container, [`.designinit`](.designinit) wraps `xschem` so that a plain `xschem <file>` from anywhere uses `schematic/xschem/xschemrc`.
+- Inside the container, [`.designinit`](.designinit) can wrap `xschem` so that a plain `xschem <file>` from anywhere uses `schematic/xschem/xschemrc`. Note the container only auto-sources `$DESIGNS/.designinit`, one level above this repo, so this repo's own copy takes effect only once you `source .designinit` in the shell.
 - Starting Xschem from within one of the seven folders picks up that folder's file, which is the normal interactive case.
 
 

@@ -10,10 +10,12 @@ if { ![info exists env(PDK_ROOT)] } {
   }
 }
 
-# Set default PDK (fall back if env points to a PDK that is not installed)
-if { ![info exists env(PDK)] || ![file isdir [file join $env(PDK_ROOT) $env(PDK)]] } {
-  set ::env(PDK) ihp-sg13cmos5l
-}
+# Pin the PDK. This repo targets SG13CMOS5L exclusively, so the PDK is set here
+# unconditionally rather than defaulted: the container sources $DESIGNS/.designinit,
+# which exports a *valid* ihp-sg13g2 for the sibling LinHT_IC checkout that shares the
+# designs/ directory. A "fall back only if the env PDK is not installed" guard cannot
+# catch that — the env PDK exists, it is simply the wrong one for this chip.
+set ::env(PDK) ihp-sg13cmos5l
 
 # Source the PDK xschemrc file
 if {![info exists PDK]} {
