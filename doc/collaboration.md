@@ -10,7 +10,7 @@ project. The documentation standard itself is a separate document:
 | Assumption | Value |
 | --- | --- |
 | Team size | 5–10, distributed, part-time |
-| Canonical repo & CI | GitHub `Landflier/LinHT-rfic` — stays canonical |
+| Canonical repo & CI | GitHub `Landflier/LinHT-RFIC_sg130cmos5l` — this repo, canonical since 2026-08-28 |
 | Hosting available | Home server / self-managed box, residential connection |
 | Domain | `landflier.com`, subdomains free to allocate |
 | Hard deadline | Chipalooza tapeout 2026-11-09 (≈11 weeks) — infrastructure must not eat design time |

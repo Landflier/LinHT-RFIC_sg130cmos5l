@@ -1,11 +1,13 @@
-# LinHT RFIC — Fractional-N PLL in IHP SG13CMOS5L
+# LinHT RFIC — An Open-Source Handheld Radio IC in IHP SG13CMOS5L
 
 [![License: Solderpad Hardware License v2.1](https://img.shields.io/badge/License-Solderpad%20Hardware%20License%20v2.1-blue.svg)](LICENSE)
 
-This repository contains the frequency synthesizer for the **LinHT** handheld radio.
-The synthesizer is an entry to
+This repository designs the radio IC for the **LinHT** open-source handheld radio. Every
+block of the IC is built on the IHP SG13CMOS5L Open-PDK.
+
+The PLL comes first. It is an entry to
 [**Chipalooza Challenge #2**](https://opencircuitdesign.com/chipalooza/), an open-source
-analog IP shuttle that runs on the IHP SG13CMOS5L Open-PDK.
+analog IP shuttle that runs on the same PDK.
 
 > [!IMPORTANT]
 > All work needs the [IIC-OSIC-TOOLS](https://github.com/iic-jku/IIC-OSIC-TOOLS) container,
@@ -17,22 +19,16 @@ analog IP shuttle that runs on the IHP SG13CMOS5L Open-PDK.
 LinHT is an open-source handheld radio. It transmits and receives **M17**, an open digital
 voice and data protocol, and analog FM.
 
-No vendor sells the transceiver IC that the radio needs. It must cover 130 MHz to 520 MHz
-without a gap. It must also give the host processor an I/Q data stream. The
-[LinHT-rfic](https://github.com/Landflier/LinHT-rfic) repository designs that transceiver in
-IHP SG13G2. [`doc/design_plan.md`](doc/design_plan.md) states its specifications and its
-schedule.
+No vendor sells the IC that the radio needs. It must cover 130 MHz to 520 MHz without a
+gap. It must also give the host processor an I/Q data stream.
 
-A transceiver needs a frequency synthesizer. **This repository prototypes that synthesizer
-first, alone, in a different PDK**, because Chipalooza gives it a free tapeout and three
-design reviews. What the silicon teaches then returns to the SG13G2 transceiver.
+This repository designs that IC. It will hold every block of it, and it builds them all on
+one PDK: **IHP SG13CMOS5L**. [`doc/design_plan.md`](doc/design_plan.md) states the
+specifications and the schedule.
 
-The two repositories therefore hold two PDKs, and they must not mix:
-
-| Repository | PDK | Contents |
-| --- | --- | --- |
-| [LinHT-rfic](https://github.com/Landflier/LinHT-rfic) | IHP SG13G2 | The complete transceiver. |
-| This one | IHP SG13CMOS5L | The PLL prototype for Chipalooza. |
+The frequency synthesizer comes first, because Chipalooza gives it a free tapeout and three
+design reviews. The receive chain, the transmit chain and the data converters follow. Each
+one becomes a macro under [`macros/`](macros/), in the same structure the PLL uses now.
 
 
 ## Where to find the PLL
@@ -43,7 +39,7 @@ The PLL is the macro [`macros/pll_top/`](macros/pll_top/). Read these three file
 | --- | --- |
 | [`macros/pll_top/doc/chipalooza_pll_proposal.md`](macros/pll_top/doc/chipalooza_pll_proposal.md) | The architecture, the specification table and the Chipalooza submission. |
 | [`macros/pll_top/README.md`](macros/pll_top/README.md) | The macro itself: cells, testbenches and how to run them. |
-| [`doc/design_plan.md`](doc/design_plan.md) | The transceiver that this PLL serves. |
+| [`doc/design_plan.md`](doc/design_plan.md) | The complete radio IC that this PLL serves. |
 
 The PLL is a fractional-N charge-pump synthesizer. An LC-tank VCO sets the frequency. A
 MASH 1-1-1 delta-sigma modulator, 20 bits wide, dithers a multi-modulus divider that
